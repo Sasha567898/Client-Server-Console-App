@@ -1,8 +1,11 @@
 
 CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra
+ifeq ($(OS),Windows_NT)
 LDFLAGS := -L\C:\MinGW\lib -lws2_32  # Link against ws2_32 library
-
+else
+    LDFLAGS :=
+endif
 # Executable name
 TARGET := server
 

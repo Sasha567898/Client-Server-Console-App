@@ -65,11 +65,14 @@ int initializeServer()
 int acceptClient() {
     printf("Waiting for a client to connect...\n");
     struct sockaddr_in clientAddr;
+
+    #ifdef _WIN32
     int addrLen = sizeof(clientAddr);
-
-
+    #else
+    socklen_t addrLen = sizeof(clientAddr);
+    #endif
+    
     int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, &addrLen);
-
 
     if (clientSocket == -1) {
         perror("Accepting client failed");
